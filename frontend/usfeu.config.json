@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "USFEU Raspisanie",
+      "script": "npx",
+      "interpreter": "none",
+      "args": "node server.js"
+    }
+  ]
+}
