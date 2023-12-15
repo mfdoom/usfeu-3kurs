@@ -77,7 +77,7 @@ app.use(require("express-session")({ secret: "keyboard cat" }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.io = io
+// app.io = io
 
 app.get("/", function (req, res) {
   res.json({ user: req.user })

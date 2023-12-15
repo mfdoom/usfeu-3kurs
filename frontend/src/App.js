@@ -19,7 +19,10 @@ function App() {
   }
 
   const logout = () => {
-    window.open(`${config.CALLBACK_URL}logout`, "_self")
+    let c = window.confirm("Выход?")
+    if (c) {
+      window.open(`${config.CALLBACK_URL}logout`, "_self")
+    }
   }
 
   const [user, setUser] = useState({})
@@ -73,80 +76,74 @@ function App() {
     getRasp()
   }, [])
 
-  // useEffect(() => {
-  //   setFilteredData(projectData.filter((data) => data.category === category));
-  // }, [category, projectData]);
-
-  // const handleCategory = (res) => {
-  //   setCategory(res.data);
-  // };
-
   function checkDisciplesByDay(daynumber) {
     let filteredArr = disc.filter((value) => {
       return value.id === daynumber
     })
-    let result = filteredArr.map((item) => {
+    let result = filteredArr.map((item, index) => {
       return item.disciples.map((i, ind) => {
         return i.name?.length > 1 ? (
-          <div key={ind} className="event">
-            <div
-              onClick={() => {
-                if (user?.displayName.length === 0) {
-                  return null
-                }
-                let dispNameInput = prompt("", i.name)
-                if (dispNameInput === null) {
-                  return
-                }
-                if (dispNameInput.trim().length === 0) {
-                  return
-                } else changeDiscNameById(i._id, dispNameInput, "name")
-              }}
-              className={
-                i.name.toLowerCase().includes("зачет") ||
-                i.name.toLowerCase().includes("экз")
-                  ? "event-desc ex"
-                  : "event-desc"
-              }
-            >
-              {i.name}
-            </div>
-            <div
-              onClick={() => {
-                if (user?.displayName.length === 0) {
-                  return null
-                }
-                let inp = prompt("", i.time)
-                if (inp === null) {
-                  return
-                }
-                if (inp.trim().length === 0) {
-                  return
-                } else changeTimeById(i._id, inp, "time")
-              }}
-              className="event-time"
-            >
-              {i.time}
+          <React.Fragment key={ind}>
+            <div className="event">
               <div
-                onClick={(e) => {
-                  e.stopPropagation()
+                onClick={() => {
                   if (user?.displayName.length === 0) {
                     return null
                   }
-                  let inp = prompt("", i.aud)
+                  let dispNameInput = prompt("", i.name)
+                  if (dispNameInput === null) {
+                    return
+                  }
+                  if (dispNameInput.trim().length === 0) {
+                    return
+                  } else changeDiscNameById(i._id, dispNameInput, "name")
+                }}
+                className={
+                  i.name.toLowerCase().includes("зачет") ||
+                  i.name.toLowerCase().includes("экз")
+                    ? "event-desc ex"
+                    : "event-desc"
+                }
+              >
+                {i.name}
+              </div>
+              <div
+                onClick={() => {
+                  if (user?.displayName.length === 0) {
+                    return null
+                  }
+                  let inp = prompt("", i.time)
                   if (inp === null) {
                     return
                   }
                   if (inp.trim().length === 0) {
                     return
-                  } else changeAudById(i._id, inp, "aud")
+                  } else changeTimeById(i._id, inp, "time")
                 }}
-                className="aud"
+                className="event-time"
               >
-                {i.aud}
+                {i.time}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    if (user?.displayName.length === 0) {
+                      return null
+                    }
+                    let inp = prompt("", i.aud)
+                    if (inp === null) {
+                      return
+                    }
+                    if (inp.trim().length === 0) {
+                      return
+                    } else changeAudById(i._id, inp, "aud")
+                  }}
+                  className="aud"
+                >
+                  {i.aud}
+                </div>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         ) : (
           ""
         )
@@ -176,13 +173,64 @@ function App() {
         time: nameInput,
         purpose: purpose,
       })
-      .then(function (response) {
-        // console.log(response)
-        // refreshRasp()
+      .then((resObject) => {
+        setDisc(resObject.data)
+        console.log(disc)
       })
-      .catch(function (error) {
-        console.log(error)
+      .catch((e) => {
+        console.log(e)
       })
+  }
+
+  function generateDayCells1() {
+    const cells = []
+    for (let i = 6; i < 13; i++) {
+      cells.push(
+        <td key={i} className={DateDay === i ? "day today" : "day"}>
+          <div className="date">{i}</div>
+          {checkDisciplesByDay(i)}
+        </td>
+      )
+    }
+    return cells
+  }
+  function generateDayCells2() {
+    const cells = []
+    for (let i = 13; i < 20; i++) {
+      cells.push(
+        <td key={i} className={DateDay === i ? "day today" : "day"}>
+          <div className="date">{i}</div>
+          {checkDisciplesByDay(i)}
+        </td>
+      )
+    }
+    return cells
+  }
+
+  function generateDayCells3() {
+    const cells = []
+    for (let i = 20; i < 27; i++) {
+      cells.push(
+        <td key={i} className={DateDay === i ? "day today" : "day"}>
+          <div className="date">{i}</div>
+          {checkDisciplesByDay(i)}
+        </td>
+      )
+    }
+    return cells
+  }
+
+  function generateDayCells4() {
+    const cells = []
+    for (let i = 27; i < 31; i++) {
+      cells.push(
+        <td key={i} className={DateDay === i ? "day today" : "day"}>
+          <div className="date">{i}</div>
+          {checkDisciplesByDay(i)}
+        </td>
+      )
+    }
+    return cells
   }
 
   const changeAudById = (_id, nameInput, purpose) => {
@@ -191,19 +239,23 @@ function App() {
         aud: nameInput,
         purpose: purpose,
       })
-      .then(function (response) {
-        // console.log(response)
-        // refreshRasp()
+      .then((resObject) => {
+        setDisc(resObject.data)
+        console.log(disc)
       })
-      .catch(function (error) {
-        console.log(error)
+      .catch((e) => {
+        console.log(e)
       })
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <a onClick={vkFunc} className="link" style={{}}>
+        <a
+          onClick={user?.displayName ? logout : vkFunc}
+          className="link"
+          style={{}}
+        >
           <div
             style={{
               background: "rgb(25 107 191)",
@@ -235,8 +287,7 @@ function App() {
                 backgroundImage: "url('../img/vk.png')",
                 backgroundPosition: "-1px 1px",
                 borderRadius: "50%",
-                border: "1px solid #d1d1d1",
-                borderStyle: "dashed",
+                border: "1px solid rgb(93 124 151)",
               }}
             ></i>
           </div>
@@ -254,153 +305,10 @@ function App() {
               <th scope="col">Суббота</th>
               <th scope="col">Воскресенье</th>
             </tr>
-            <tr className="days">
-              <td className={DateDay === 6 ? "day today" : "day"}>
-                {checkDisciplesByDay(6)}
-              </td>
-              <td className={DateDay === 7 ? "day today" : "day"}>
-                <div className="date">7</div>
-                {checkDisciplesByDay(7)}
-              </td>
-              <td className={DateDay === 8 ? "day today" : "day"}>
-                <div className="date">8</div>
-                {checkDisciplesByDay(8)}
-              </td>
-              <td className={DateDay === 9 ? "day today" : "day"}>
-                <div className="date">9</div>
-                {checkDisciplesByDay(9)}
-              </td>
-              <td className={DateDay === 10 ? "day today" : "day"}>
-                <div className="date">10</div>
-                {checkDisciplesByDay(10)}
-              </td>
-
-              <td className={DateDay === 11 ? "day today" : "day"}>
-                <div className="date">11</div>
-                {checkDisciplesByDay(11)}
-              </td>
-              <td className={DateDay === 12 ? "day today" : "day"}>
-                <div className="date">12</div>
-                {checkDisciplesByDay(12)}
-              </td>
-            </tr>
-            <tr>
-              <td className={DateDay === 13 ? "day today" : "day"}>
-                <div className="date">13</div>
-                {checkDisciplesByDay(13)}
-              </td>
-              <td className={DateDay === 14 ? "day today" : "day"}>
-                <div className="date">14</div>
-                {checkDisciplesByDay(14)}
-              </td>
-              <td className={DateDay === 15 ? "day today" : "day"}>
-                <div className="date">15</div>
-                {checkDisciplesByDay(15)}
-              </td>
-              <td className={DateDay === 16 ? "day today" : "day"}>
-                <div className="date">16</div>
-                {checkDisciplesByDay(16)}
-              </td>
-              <td className={DateDay === 17 ? "day today" : "day"}>
-                <div className="date">17</div>
-                {checkDisciplesByDay(17)}
-              </td>
-              <td className={DateDay === 18 ? "day today" : "day"}>
-                <div className="date">18</div>
-
-                {checkDisciplesByDay(18)}
-              </td>
-              <td className={DateDay === 19 ? "day today" : "day"}>
-                <div className="date">19</div>
-                {checkDisciplesByDay(19)}
-              </td>
-            </tr>
-            <tr>
-              <td className={DateDay === 20 ? "day today" : "day"}>
-                <div className="date">20</div>
-                {checkDisciplesByDay(20)}
-                {/* <iframe
-                style={{
-                  border: "5px solid #24aee1",
-                  borderRadius: "10px",
-                  margin: "auto",
-                }}
-                id="ytplayer"
-                type="text/html"
-                width="200"
-                height="160"
-                src="https://www.youtube.com/embed/lrDX_Tg4HE0?autoplay=0&origin=https://usfeu-itse.herokuapp.com/"
-                frameborder="0"
-              /> */}
-              </td>
-              <td className={DateDay === 21 ? "day today" : "day"}>
-                <div className="date">21</div>
-                {checkDisciplesByDay(21)}
-              </td>
-              <td className={DateDay === 22 ? "day today" : "day"}>
-                <div className="date">22</div>
-                {checkDisciplesByDay(22)}
-              </td>
-              <td className={DateDay === 23 ? "day today" : "day"}>
-                <div className="date">23</div>
-                {checkDisciplesByDay(23)}
-              </td>
-              <td className={DateDay === 24 ? "day today" : "day"}>
-                <div className="date">24</div>
-                {checkDisciplesByDay(24)}
-              </td>
-              <td className={DateDay === 25 ? "day today" : "day"}>
-                <div className="date">25</div>
-                {checkDisciplesByDay(25)}
-              </td>
-              <td className={DateDay === 26 ? "day today" : "day"}>
-                <div className="date">26</div>
-                {checkDisciplesByDay(26)}
-              </td>
-            </tr>
-            <tr>
-              <td className={DateDay === 27 ? "day today" : "day"}>
-                <div className="date">27</div>
-                {checkDisciplesByDay(27)}
-                {/* <iframe
-                style={{
-                  border: "5px solid #24aee1",
-                  borderRadius: "10px",
-                  margin: "auto",
-                }}
-                id="ytplayer"
-                type="text/html"
-                width="200"
-                height="160"
-                src="https://www.youtube.com/embed/lrDX_Tg4HE0?autoplay=0&origin=https://usfeu-itse.herokuapp.com/"
-                frameborder="0"
-              /> */}
-              </td>
-              <td className={DateDay === 28 ? "day today" : "day"}>
-                <div className="date">28</div>
-                {checkDisciplesByDay(28)}
-              </td>
-              <td className={DateDay === 29 ? "day today" : "day"}>
-                <div className="date">29</div>
-                {checkDisciplesByDay(29)}
-              </td>
-              <td className={DateDay === 30 ? "day today" : "day"}>
-                <div className="date">30</div>
-                {checkDisciplesByDay(30)}
-              </td>
-              <td className={DateDay === 1 ? "day today" : "day"}>
-                <div className="date">1</div>
-                {checkDisciplesByDay(1)}
-              </td>
-              <td className={DateDay === 2 ? "day today" : "day"}>
-                <div className="date">2</div>
-                {checkDisciplesByDay(2)}
-              </td>
-              <td className={DateDay === 3 ? "day today" : "day"}>
-                <div className="date">3</div>
-                {checkDisciplesByDay(3)}
-              </td>
-            </tr>
+            <tr className="days">{generateDayCells1()}</tr>
+            <tr className="days">{generateDayCells2()}</tr>
+            <tr className="days">{generateDayCells3()}</tr>
+            <tr className="days">{generateDayCells4()}</tr>
           </tbody>
         </table>
       </header>
