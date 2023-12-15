@@ -27,6 +27,27 @@ function App() {
 
   const [user, setUser] = useState({})
   const [disc, setDisc] = useState([])
+  const [test, setTest] = useState({ test: "test" })
+
+  function getRaspEffect() {
+    fetch(`${config.CALLBACK_URL}api/rasp`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json()
+        throw new Error("Аутентификация не пройдена.")
+      })
+      .then((resObject) => {
+        setDisc(resObject)
+      })
+      .catch((err) => {})
+  }
 
   useEffect(() => {
     const getUser = () => {
@@ -76,7 +97,57 @@ function App() {
     getRasp()
   }, [])
 
-  function checkDisciplesByDay(daynumber) {
+  useEffect(() => {
+    getRaspEffect()
+  }, [test])
+
+  //
+
+  const changeDiscNameById = (_id, nameInput, purpose) => {
+    axios
+      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+        name: nameInput,
+        purpose: purpose,
+      })
+      .then((resObject) => {
+        setTest({ test: "test" })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
+  const changeTimeById = (_id, nameInput, purpose) => {
+    axios
+      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+        time: nameInput,
+        purpose: purpose,
+      })
+      .then((resObject) => {
+        setTest({ test: "test" })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
+  const changeAudById = (_id, nameInput, purpose) => {
+    axios
+      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+        aud: nameInput,
+        purpose: purpose,
+      })
+      .then((resObject) => {
+        setTest({ test: "test" })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
+  //
+
+  let checkDisciplesByDay = (daynumber) => {
     let filteredArr = disc.filter((value) => {
       return value.id === daynumber
     })
@@ -152,36 +223,6 @@ function App() {
     return result
   }
 
-  const changeDiscNameById = (_id, nameInput, purpose) => {
-    axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
-        name: nameInput,
-        purpose: purpose,
-      })
-      .then((resObject) => {
-        setDisc(resObject.data)
-        console.log(disc)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  }
-
-  const changeTimeById = (_id, nameInput, purpose) => {
-    axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
-        time: nameInput,
-        purpose: purpose,
-      })
-      .then((resObject) => {
-        setDisc(resObject.data)
-        console.log(disc)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  }
-
   function generateDayCells1() {
     const cells = []
     for (let i = 6; i < 13; i++) {
@@ -231,21 +272,6 @@ function App() {
       )
     }
     return cells
-  }
-
-  const changeAudById = (_id, nameInput, purpose) => {
-    axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
-        aud: nameInput,
-        purpose: purpose,
-      })
-      .then((resObject) => {
-        setDisc(resObject.data)
-        console.log(disc)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
   }
 
   return (

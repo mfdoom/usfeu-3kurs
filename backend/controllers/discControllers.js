@@ -47,16 +47,10 @@ const changeRaspById = AsyncHandler(async (req, res) => {
       { $set: { "disciples.$.aud": aud } }
     )
   }
-  const rasp = await Rasp.find({})
+  // const rasp = await Rasp.find({})
 
-  if (rasp) {
-    res.json(rasp)
-    console.log(rasp)
-    res.status(200)
-  } else {
-    res.status(404)
-    throw new Error("Disciple not found")
-  }
+  res.json("OK")
+  res.status(200)
 })
 
 module.exports = { getRasp, changeRaspById }
