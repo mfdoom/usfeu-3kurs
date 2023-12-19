@@ -52,7 +52,6 @@ passport.use(
 var app = express()
 
 const cors = require("cors")
-const { config } = require("dotenv")
 
 const httpServer = createServer()
 const io = new Server(httpServer, {
