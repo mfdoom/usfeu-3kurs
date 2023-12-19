@@ -3,7 +3,7 @@ require("dotenv").config()
 const config = require("./config.js")
 const PORT = 91
 const connectDb = require("./config/db.js")
-const CLIENT_URL = `${config.CALLBACK_URL}auth/vk/callback`
+const CLIENT_URL = `${config.CLIENT_URL}`
 // const CLIENT_URL = process.env.CLIENT_URL
 const { notFound, errorHandler } = require("./middleware/errorMiddleWare.js")
 const { createServer } = require("http")
