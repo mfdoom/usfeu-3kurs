@@ -1,5 +1,6 @@
 require("dotenv").config()
 const CLIENT_URL = process.env.CLIENT_URL
+const config = require("./config.js")
 const PORT = 90
 const connectDb = require("./config/db.js")
 
