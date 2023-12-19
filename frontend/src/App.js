@@ -310,7 +310,7 @@ function App() {
                 width: "24px",
                 height: " 24px",
                 marginLeft: "5px",
-                backgroundImage: "url('../img/vk.png')",
+                backgroundImage: "url('../webdev/img/vk.png')",
                 backgroundPosition: "-1px 1px",
                 borderRadius: "50%",
                 border: "1px solid rgb(93 124 151)",
