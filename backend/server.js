@@ -1,4 +1,5 @@
 require("dotenv").config()
+// const { config } = require("dotenv")
 const CLIENT_URL = process.env.CLIENT_URL
 const config = require("./config.js")
 const PORT = 90
@@ -53,7 +54,6 @@ passport.use(
 var app = express()
 
 const cors = require("cors")
-const { config } = require("dotenv")
 
 const httpServer = createServer()
 const io = new Server(httpServer, {
