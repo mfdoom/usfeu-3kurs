@@ -2,7 +2,7 @@ require("dotenv").config()
 // const { config } = require("dotenv")
 const CLIENT_URL = process.env.CLIENT_URL
 const config = require("./config.js")
-const PORT = 90
+const PORT = 91
 const connectDb = require("./config/db.js")
 
 const { notFound, errorHandler } = require("./middleware/errorMiddleWare.js")
