@@ -42,6 +42,7 @@ passport.use(
       callbackURL: `${config.CALLBACK_URL}auth/vk/callback`,
       scope: [],
       profileFields: [],
+      lang: "ru",
     },
     function verify(accessToken, refreshToken, params, profile, done) {
       process.nextTick(function () {
