@@ -5,7 +5,7 @@ const prod = {
 }
 const dev = {
   CLIENT_URL: "http://localhost:3000",
-  CALLBACK_URL: "http://localhost:90/",
+  CALLBACK_URL: "http://localhost:91/",
 }
 
 const config = process.env.NODE_ENV === "dev" ? dev : prod

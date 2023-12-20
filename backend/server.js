@@ -1,10 +1,8 @@
 require("dotenv").config()
-// const { config } = require("dotenv")
 const config = require("./config.js")
 const PORT = 91
 const connectDb = require("./config/db.js")
 const CLIENT_URL = `${config.CLIENT_URL}`
-// const CLIENT_URL = process.env.CLIENT_URL
 const { notFound, errorHandler } = require("./middleware/errorMiddleWare.js")
 const { createServer } = require("http")
 const { Server } = require("socket.io")
@@ -79,8 +77,6 @@ app.use(require("express-session")({ secret: "keyboard cat" }))
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-// app.io = io
 
 app.get("/", function (req, res) {
   res.json({ user: req.user })
