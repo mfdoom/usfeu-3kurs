@@ -62,6 +62,36 @@ caption {
   font-size: 13px;
 }
 
+.delete {
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: white;
+  color: red;
+  padding: 5px 8px;
+  border-radius: 50%;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add {
+  display: none;
+  position: absolute;
+  background-color: #2b5ad7;
+  color: white;
+  padding: 6px 9px;
+  border-radius: 50%;
+  font-weight: 600;
+  cursor: pointer;
+  top: 4px;
+  right: 5px;
+  border: 1px solid #c3c3c3;
+}
+
+.day {
+  position: relative;
+}
 #calendar td.day.today {
   background: #194d33;
 }
@@ -85,6 +115,7 @@ caption {
   flex: 0 0 auto;
   align-self: flex-end;
   border: 1px dashed;
+  position: relative;
 }
 
 div.aud {
@@ -102,11 +133,22 @@ div.aud {
   border-radius: 4px;
   padding: 5px;
   margin-bottom: 5px;
+  position: relative;
   line-height: 14px;
   border: 1px solid #b5dbdc;
   color: #009aaf;
   text-decoration: none;
   background: #343434;
+}
+
+#calendar td.day:hover .add {
+  display: flex;
+  z-index: 9999;
+}
+
+#calendar .event:hover .delete {
+  display: flex;
+  z-index: 9999;
 }
 
 #calendar .event-desc {

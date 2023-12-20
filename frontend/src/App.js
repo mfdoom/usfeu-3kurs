@@ -157,15 +157,18 @@ function App() {
           <React.Fragment key={ind}>
             <div className="event">
               <div
+                onClick={() => window.confirm(`Удалить ${i.name} ?`)}
+                className="delete"
+              >
+                X
+              </div>
+              <div
                 onClick={() => {
                   if (user?.displayName.length === 0) {
                     return null
                   }
                   let dispNameInput = prompt("", i.name)
                   if (dispNameInput === null) {
-                    return
-                  }
-                  if (dispNameInput.trim().length === 0) {
                     return
                   } else changeDiscNameById(i._id, dispNameInput, "name")
                 }}
@@ -178,6 +181,7 @@ function App() {
               >
                 {i.name}
               </div>
+
               <div
                 onClick={() => {
                   if (user?.displayName.length === 0) {
@@ -229,6 +233,9 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
+          <div className="add" onClick={() => alert("Добавить")}>
+            +
+          </div>
           {checkDisciplesByDay(i)}
         </td>
       )
@@ -241,6 +248,9 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
+          <div className="add" onClick={() => alert("Добавить")}>
+            +
+          </div>
           {checkDisciplesByDay(i)}
         </td>
       )
@@ -254,6 +264,9 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
+          <div className="add" onClick={() => alert("Добавить")}>
+            +
+          </div>
           {checkDisciplesByDay(i)}
         </td>
       )
@@ -267,6 +280,9 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
+          <div className="add" onClick={() => alert("Добавить")}>
+            +
+          </div>
           {checkDisciplesByDay(i)}
         </td>
       )
@@ -313,7 +329,7 @@ function App() {
                 backgroundImage: "url('../webdev/img/vk.png')",
                 backgroundPosition: "-1px 1px",
                 borderRadius: "50%",
-                border: "1px solid rgb(93 124 151)",
+                border: "1px solid rgb(84 144 217)",
               }}
             ></i>
           </div>
