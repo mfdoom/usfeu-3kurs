@@ -53,4 +53,20 @@ const changeRaspById = AsyncHandler(async (req, res) => {
   res.status(200)
 })
 
-module.exports = { getRasp, changeRaspById }
+const deleteDiscById = AsyncHandler(async (req, res) => {
+  let _id = req.body.id
+  let disc_id = req.body.disc_id
+  console.log(_id, disc_id)
+  let del = async () =>
+    Rasp.updateOne(
+      { _id: mongoose.Types.ObjectId(_id) },
+      { $pull: { disciples: { _id: mongoose.Types.ObjectId(disc_id) } } }
+    )
+  // res.json(rasp)
+  del().then((result) => {
+    res.json("delete OK")
+    res.status(201)
+  })
+})
+
+module.exports = { getRasp, changeRaspById, deleteDiscById }

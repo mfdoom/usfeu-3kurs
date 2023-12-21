@@ -147,6 +147,20 @@ function App() {
 
   //
 
+  const deleteDiscById = (id, disc_id) => {
+    axios
+      .post(`${config.CALLBACK_URL}api/rasp/delete/${id}`, {
+        id: id,
+        disc_id: disc_id,
+      })
+      .then((resObject) => {
+        setTest({ test: "test" })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
   let checkDisciplesByDay = (daynumber) => {
     let filteredArr = disc.filter((value) => {
       return value.id === daynumber
@@ -157,7 +171,12 @@ function App() {
           <React.Fragment key={ind}>
             <div className="event">
               <div
-                onClick={() => window.confirm(`Удалить ${i.name} ?`)}
+                onClick={() => {
+                  let conf = window.confirm(`Удалить ${i.name} ?`)
+                  if (conf) {
+                    deleteDiscById(item._id, i._id)
+                  }
+                }}
                 className="delete"
               >
                 X
@@ -300,7 +319,7 @@ function App() {
         >
           <div
             style={{
-              background: "rgb(25 107 191)",
+              background: "#2287ee",
               display: "flex",
               alignItems: "center",
               padding: " 2px 12px",
@@ -328,8 +347,6 @@ function App() {
                 marginLeft: "5px",
                 backgroundImage: "url('../webdev/img/vk.png')",
                 backgroundPosition: "-1px 1px",
-                borderRadius: "50%",
-                border: "1px solid rgb(84 144 217)",
               }}
             ></i>
           </div>
