@@ -44,7 +44,29 @@ function App() {
         throw new Error("Аутентификация не пройдена.")
       })
       .then((resObject) => {
-        setDisc(resObject)
+        // let newDisc = Array.prototype.sort((a, b) => {
+        //   return a.disciples - b.disciples
+        // })
+        const prom = new Promise((resolve) => {
+          const sortedData = resObject.map((item) => {
+            const sortedDisciples = item.disciples.sort((a, b) => {
+              const timeA = a.time.replace("-", "")
+              const timeB = b.time.replace("-", "")
+              // console.log(`A: ${timeA}, B: ${timeB}`)
+              return timeA - timeB
+            })
+
+            return { ...item, disciples: sortedDisciples }
+          })
+          resolve(sortedData)
+        })
+
+        // console.log(sortedData)
+        prom.then((res) => {
+          console.log(res)
+          setDisc(res)
+        })
+        setTest({ test: "test" })
       })
       .catch((err) => {})
   }
@@ -95,10 +117,9 @@ function App() {
           const prom = new Promise((resolve) => {
             const sortedData = resObject.map((item) => {
               const sortedDisciples = item.disciples.sort((a, b) => {
-                // Предположим, что время записано в формате HH:MM, можно адаптировать под ваш формат
-                const timeA = a.time.replace("-", "") // Преобразуем формат времени
-                const timeB = b.time.replace("-", "") // Преобразуем формат времени
-                console.log(`A: ${timeA}, B: ${timeB}`)
+                const timeA = a.time.replace("-", "")
+                const timeB = b.time.replace("-", "")
+                // console.log(`A: ${timeA}, B: ${timeB}`)
                 return timeA - timeB
               })
 
@@ -109,8 +130,10 @@ function App() {
 
           // console.log(sortedData)
           prom.then((res) => {
+            console.log(res)
             setDisc(res)
           })
+          setTest({ test: "test" })
         })
         .catch((err) => {})
     }
