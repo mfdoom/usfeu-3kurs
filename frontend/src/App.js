@@ -89,7 +89,28 @@ function App() {
           throw new Error("Аутентификация не пройдена.")
         })
         .then((resObject) => {
-          setDisc(resObject)
+          // let newDisc = Array.prototype.sort((a, b) => {
+          //   return a.disciples - b.disciples
+          // })
+          const prom = new Promise((resolve) => {
+            const sortedData = resObject.map((item) => {
+              const sortedDisciples = item.disciples.sort((a, b) => {
+                // Предположим, что время записано в формате HH:MM, можно адаптировать под ваш формат
+                const timeA = a.time.replace("-", "") // Преобразуем формат времени
+                const timeB = b.time.replace("-", "") // Преобразуем формат времени
+                console.log(`A: ${timeA}, B: ${timeB}`)
+                return timeA - timeB
+              })
+
+              return { ...item, disciples: sortedDisciples }
+            })
+            resolve(sortedData)
+          })
+
+          // console.log(sortedData)
+          prom.then((res) => {
+            setDisc(res)
+          })
         })
         .catch((err) => {})
     }
@@ -152,6 +173,21 @@ function App() {
       .post(`${config.CALLBACK_URL}api/rasp/delete/${id}`, {
         id: id,
         disc_id: disc_id,
+      })
+      .then((resObject) => {
+        setTest({ test: "test" })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
+  const pushDiscInfo = (dayid, name, time, aud) => {
+    axios
+      .post(`${config.CALLBACK_URL}api/rasp/push/${dayid}`, {
+        name,
+        time,
+        aud,
       })
       .then((resObject) => {
         setTest({ test: "test" })
@@ -252,7 +288,18 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
-          <div className="add" onClick={() => alert("Добавить")}>
+          <div
+            className="add"
+            onClick={() => {
+              let name = window.prompt("Название...")
+              let time = window.prompt("Время...")
+              let aud = window.prompt("Аудитория...")
+              if (!name || !time || !aud) {
+                return
+              }
+              pushDiscInfo(i, name, time, aud)
+            }}
+          >
             +
           </div>
           {checkDisciplesByDay(i)}

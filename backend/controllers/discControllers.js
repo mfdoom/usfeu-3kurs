@@ -69,4 +69,39 @@ const deleteDiscById = AsyncHandler(async (req, res) => {
   })
 })
 
-module.exports = { getRasp, changeRaspById, deleteDiscById }
+const pushDiscById = AsyncHandler(async (req, res) => {
+  let dayid = req.params.id
+  let name = req.body.name
+  let time = req.body.time
+  let aud = req.body.aud
+  let objDisc = {
+    name,
+    time,
+    aud,
+  }
+  console.log(dayid, name, time, aud)
+  let push = async () =>
+    await Rasp.findOneAndUpdate(
+      { id: dayid },
+      { $push: { disciples: objDisc } }
+    )
+  // res.json(rasp)
+
+  // People.findOneAndUpdate(
+  //    { _id: req.body.id },
+  //    { $push: { friends: objFriends  } },
+  //   function (error, success) {
+  //         if (error) {
+  //             console.log(error);
+  //         } else {
+  //             console.log(success);
+  //         }
+  //     });
+
+  push().then((result) => {
+    res.json("push OK")
+    res.status(202)
+  })
+})
+
+module.exports = { getRasp, changeRaspById, deleteDiscById, pushDiscById }
