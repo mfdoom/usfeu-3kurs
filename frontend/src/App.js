@@ -231,6 +231,9 @@ function App() {
             <div className="event">
               <div
                 onClick={() => {
+                  if (user?.displayName.length === 0) {
+                    return null
+                  }
                   let conf = window.confirm(`Удалить ${i.name} ?`)
                   if (conf) {
                     deleteDiscById(item._id, i._id)
@@ -305,6 +308,24 @@ function App() {
     return result
   }
 
+  function showPrompts(i) {
+    let name = prompt("Введите название:")
+    if (name === null) {
+      return
+    }
+
+    let time = prompt("Введите время:")
+    if (time === null) {
+      return
+    }
+
+    let aud = prompt("Введите аудиторию:")
+    if (aud === null) {
+      return
+    }
+    pushDiscInfo(i, name, time, aud)
+  }
+
   function generateDayCells1() {
     const cells = []
     for (let i = 6; i < 13; i++) {
@@ -314,13 +335,11 @@ function App() {
           <div
             className="add"
             onClick={() => {
-              let name = window.prompt("Название...")
-              let time = window.prompt("Время...")
-              let aud = window.prompt("Аудитория...")
-              if (!name || !time || !aud) {
-                return
+              if (user?.displayName.length === 0) {
+                return null
               }
-              pushDiscInfo(i, name, time, aud)
+
+              showPrompts(i)
             }}
           >
             +
@@ -337,7 +356,16 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
-          <div className="add" onClick={() => alert("Добавить")}>
+          <div
+            className="add"
+            onClick={() => {
+              if (user?.displayName.length === 0) {
+                return null
+              }
+
+              showPrompts(i)
+            }}
+          >
             +
           </div>
           {checkDisciplesByDay(i)}
@@ -353,7 +381,16 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
-          <div className="add" onClick={() => alert("Добавить")}>
+          <div
+            className="add"
+            onClick={() => {
+              if (user?.displayName.length === 0) {
+                return null
+              }
+
+              showPrompts(i)
+            }}
+          >
             +
           </div>
           {checkDisciplesByDay(i)}
@@ -369,7 +406,16 @@ function App() {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
-          <div className="add" onClick={() => alert("Добавить")}>
+          <div
+            className="add"
+            onClick={() => {
+              if (user?.displayName.length === 0) {
+                return null
+              }
+
+              showPrompts(i)
+            }}
+          >
             +
           </div>
           {checkDisciplesByDay(i)}
