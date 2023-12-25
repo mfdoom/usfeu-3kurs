@@ -4,7 +4,7 @@ const prod = {
   CALLBACK_URL: "http://metavoid.ru:91/",
 }
 const dev = {
-  CLIENT_URL: "http://localhost:3000",
+  CLIENT_URL: "http://localhost:3000/webdev",
   CALLBACK_URL: "http://localhost:91/",
 }
 

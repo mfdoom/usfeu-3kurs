@@ -18,9 +18,14 @@ function App() {
     window.open(`${config.CALLBACK_URL}auth/vk`, "_self")
   }
 
+  const handleLogout = () => {
+    localStorage.clear()
+  }
+
   const logout = () => {
     let c = window.confirm("Выход?")
     if (c) {
+      handleLogout()
       window.open(`${config.CALLBACK_URL}logout`, "_self")
     }
   }
@@ -28,6 +33,9 @@ function App() {
   const [user, setUser] = useState({})
   const [disc, setDisc] = useState([])
   const [test, setTest] = useState({ test: "test" })
+
+  const loggedInUser = localStorage.getItem("user")
+  const foundUser = JSON.parse(loggedInUser)
 
   function getRaspEffect() {
     fetch(`${config.CALLBACK_URL}api/rasp`, {
@@ -44,15 +52,11 @@ function App() {
         throw new Error("Аутентификация не пройдена.")
       })
       .then((resObject) => {
-        // let newDisc = Array.prototype.sort((a, b) => {
-        //   return a.disciples - b.disciples
-        // })
         const prom = new Promise((resolve) => {
           const sortedData = resObject.map((item) => {
             const sortedDisciples = item.disciples.sort((a, b) => {
               const timeA = a.time.replace("-", "")
               const timeB = b.time.replace("-", "")
-              // console.log(`A: ${timeA}, B: ${timeB}`)
               return timeA - timeB
             })
 
@@ -61,12 +65,9 @@ function App() {
           resolve(sortedData)
         })
 
-        // console.log(sortedData)
         prom.then((res) => {
-          console.log(res)
           setDisc(res)
         })
-        setTest({ test: "test" })
       })
       .catch((err) => {})
   }
@@ -88,11 +89,16 @@ function App() {
         })
         .then((resObject) => {
           setUser(resObject)
+          localStorage.setItem("user", JSON.stringify(resObject))
         })
         .catch((err) => {})
     }
 
-    getUser()
+    if (!foundUser) {
+      getUser()
+    } else {
+      setUser(foundUser)
+    }
   }, [])
 
   useEffect(() => {
@@ -111,15 +117,12 @@ function App() {
           throw new Error("Аутентификация не пройдена.")
         })
         .then((resObject) => {
-          // let newDisc = Array.prototype.sort((a, b) => {
-          //   return a.disciples - b.disciples
-          // })
           const prom = new Promise((resolve) => {
             const sortedData = resObject.map((item) => {
               const sortedDisciples = item.disciples.sort((a, b) => {
                 const timeA = a.time.replace("-", "")
                 const timeB = b.time.replace("-", "")
-                // console.log(`A: ${timeA}, B: ${timeB}`)
+
                 return timeA - timeB
               })
 
@@ -128,9 +131,7 @@ function App() {
             resolve(sortedData)
           })
 
-          // console.log(sortedData)
           prom.then((res) => {
-            console.log(res)
             setDisc(res)
           })
           setTest({ test: "test" })
@@ -156,9 +157,7 @@ function App() {
       .then((resObject) => {
         setTest({ test: "test" })
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => {})
   }
 
   const changeTimeById = (_id, nameInput, purpose) => {
@@ -170,9 +169,7 @@ function App() {
       .then((resObject) => {
         setTest({ test: "test" })
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => {})
   }
 
   const changeAudById = (_id, nameInput, purpose) => {
@@ -184,9 +181,7 @@ function App() {
       .then((resObject) => {
         setTest({ test: "test" })
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => {})
   }
 
   //
@@ -200,9 +195,7 @@ function App() {
       .then((resObject) => {
         setTest({ test: "test" })
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => {})
   }
 
   const pushDiscInfo = (dayid, name, time, aud) => {
@@ -215,9 +208,7 @@ function App() {
       .then((resObject) => {
         setTest({ test: "test" })
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => {})
   }
 
   let checkDisciplesByDay = (daynumber) => {
@@ -425,6 +416,12 @@ function App() {
     return cells
   }
 
+  const checkBg = () => {
+    return foundUser
+      ? `url(${foundUser.photos[0].value})`
+      : "url('../webdev/img/vk.png')"
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -461,8 +458,10 @@ function App() {
                 width: "24px",
                 height: " 24px",
                 marginLeft: "5px",
-                backgroundImage: "url('../webdev/img/vk.png')",
-                backgroundPosition: "-1px 1px",
+                backgroundImage: checkBg(),
+                // backgroundPosition: "-1px 1px",
+                backgroundSize: "contain",
+                borderRadius: "50%",
               }}
             ></i>
           </div>
