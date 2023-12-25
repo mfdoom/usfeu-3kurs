@@ -13,9 +13,6 @@ const changeRaspById = AsyncHandler(async (req, res) => {
   let { time } = req.body
   let { aud } = req.body
   let { purpose } = req.body
-  // let item
-  // mongoose.Types.ObjectId("6579ca91c66e5e4efa621014")
-  // console.log(id)
 
   switch (purpose) {
     case "name":
@@ -47,7 +44,6 @@ const changeRaspById = AsyncHandler(async (req, res) => {
       { $set: { "disciples.$.aud": aud } }
     )
   }
-  // const rasp = await Rasp.find({})
 
   res.json("OK")
   res.status(200)
@@ -62,7 +58,7 @@ const deleteDiscById = AsyncHandler(async (req, res) => {
       { _id: mongoose.Types.ObjectId(_id) },
       { $pull: { disciples: { _id: mongoose.Types.ObjectId(disc_id) } } }
     )
-  // res.json(rasp)
+
   del().then((result) => {
     res.json("delete OK")
     res.status(201)
@@ -85,18 +81,6 @@ const pushDiscById = AsyncHandler(async (req, res) => {
       { id: dayid },
       { $push: { disciples: objDisc } }
     )
-  // res.json(rasp)
-
-  // People.findOneAndUpdate(
-  //    { _id: req.body.id },
-  //    { $push: { friends: objFriends  } },
-  //   function (error, success) {
-  //         if (error) {
-  //             console.log(error);
-  //         } else {
-  //             console.log(success);
-  //         }
-  //     });
 
   push().then((result) => {
     res.json("push OK")

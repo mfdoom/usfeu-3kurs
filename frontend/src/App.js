@@ -184,8 +184,6 @@ function App() {
       .catch((e) => {})
   }
 
-  //
-
   const deleteDiscById = (id, disc_id) => {
     axios
       .post(`${config.CALLBACK_URL}api/rasp/delete/${id}`, {
@@ -459,7 +457,6 @@ function App() {
                 height: " 24px",
                 marginLeft: "5px",
                 backgroundImage: checkBg(),
-                // backgroundPosition: "-1px 1px",
                 backgroundSize: "contain",
                 borderRadius: "50%",
               }}
