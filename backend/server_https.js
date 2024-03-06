@@ -7,11 +7,14 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleWare.js")
 const { createServer } = require("http")
 const morgan = require("morgan")
 const discRoutes = require("./routes/discRoutes.js")
-var app = require("express"),
+
+var express = require("express"),
   passport = require("passport"),
   util = require("util"),
   VkStrategy = require("passport-vk-strategy").Strategy
-//
+
+var app = express()
+
 var https = require("https")
 const fs = require("fs")
 var server = https.createServer(
@@ -21,6 +24,7 @@ var server = https.createServer(
   },
   app
 )
+
 //
 connectDb()
 
@@ -58,8 +62,6 @@ passport.use(
     }
   )
 )
-
-// var app = express()
 
 const cors = require("cors")
 
