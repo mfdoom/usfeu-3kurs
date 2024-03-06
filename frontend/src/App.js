@@ -422,7 +422,7 @@ function App() {
 
   return (
     <div className="App">
-      <section className="App-header">
+      <section className="app-content">
         <a
           onClick={user?.displayName ? logout : vkFunc}
           className="link"
@@ -465,7 +465,7 @@ function App() {
         </a>
 
         <table id="calendar">
-          <caption>ИЦЭ-31з весенняя сессия(2023)</caption>
+          <caption>ИЦЭ-31з весенняя сессия(2024)</caption>
           <tbody>
             <tr className="weekdays">
               <th scope="col">Понедельник</th>
