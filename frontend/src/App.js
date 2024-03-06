@@ -454,11 +454,11 @@ function App() {
               className="logovk"
               style={{
                 display: "flex",
-                width: "45px",
-                height: "45px",
+                width: "25px",
+                height: "25px",
                 marginLeft: "5px",
                 backgroundImage: checkBg(),
-                backgroundSize: "cover",
+                backgroundSize: "contain",
                 borderRadius: "50%",
               }}
             ></i>
