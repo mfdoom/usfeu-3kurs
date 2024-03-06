@@ -465,7 +465,7 @@ function App() {
         </a>
 
         <table id="calendar">
-          <caption>ИЦЭ-31з зимняя сессия(2023)</caption>
+          <caption>ИЦЭ-31з весенняя сессия(2023)</caption>
           <tbody>
             <tr className="weekdays">
               <th scope="col">Понедельник</th>
