@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "Rasp-Disc-server BACKEND",
+      "script": "npx",
+      "interpreter": "none",
+      "args": "nodemon server_https.js"
+    }
+  ]
+}
