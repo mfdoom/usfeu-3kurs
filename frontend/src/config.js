@@ -1,6 +1,6 @@
 const prod = {
-  SOCKET_URL: "http://metavoid.ru:90",
-  CALLBACK_URL: "http://metavoid.ru:91/",
+  SOCKET_URL: "https://metavoid.ru:90",
+  CALLBACK_URL: "https://metavoid.ru:91/",
 }
 const dev = {
   SOCKET_URL: "http://localhost:3001",
