@@ -59,16 +59,16 @@ passport.use(
   )
 )
 
-var app = express()
+// var app = express()
 
 const cors = require("cors")
 
-const httpServer = createServer()
-const io = new Server(httpServer, {
-  cors: {
-    origin: ["*"],
-  },
-}).listen(3001)
+// const httpServer = createServer()
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: ["*"],
+//   },
+// }).listen(3001)
 
 app.use(
   cors({
