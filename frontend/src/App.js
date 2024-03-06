@@ -417,7 +417,7 @@ function App() {
   const checkBg = () => {
     return foundUser
       ? `url(${foundUser.photos[0].value})`
-      : "url('../webdev/img/vk.png')"
+      : "url('../webdev/img/vkround.png')"
   }
 
   return (
