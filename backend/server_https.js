@@ -13,6 +13,7 @@ var app = require("express"),
   VkStrategy = require("passport-vk-strategy").Strategy
 //
 var https = require("https")
+const fs = require("fs")
 var server = https.createServer(
   {
     key: fs.readFileSync("../ssl/privkey.pem"),
