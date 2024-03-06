@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "Rasp-Disc-server HTTPS static",
+      "script": "npx",
+      "interpreter": "none",
+      "args": "node server_https.js"
+    }
+  ]
+}

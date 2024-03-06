@@ -1,7 +1,7 @@
 require("dotenv").config()
 const prod = {
-  CLIENT_URL: "http://metavoid.ru/webdev",
-  CALLBACK_URL: "http://metavoid.ru:91/",
+  CLIENT_URL: "http://meta-void.ru/webdev",
+  CALLBACK_URL: "http://meta-void.ru:91/",
 }
 const dev = {
   CLIENT_URL: "http://localhost:3000/webdev",
