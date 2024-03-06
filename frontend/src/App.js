@@ -417,7 +417,7 @@ function App() {
   const checkBg = () => {
     return foundUser
       ? `url(${foundUser.photos[0].value})`
-      : "url('../webdev/img/vk.png')"
+      : "url('../webdev/img/vk5.png')"
   }
 
   return (
@@ -435,6 +435,7 @@ function App() {
               alignItems: "center",
               padding: " 2px 12px",
               borderRadius: " 4px",
+              maxHeight: "24px",
             }}
           >
             <div
@@ -453,11 +454,11 @@ function App() {
               className="logovk"
               style={{
                 display: "flex",
-                width: "24px",
-                height: " 24px",
+                width: "45px",
+                height: "45px",
                 marginLeft: "5px",
                 backgroundImage: checkBg(),
-                backgroundSize: "contain",
+                backgroundSize: "cover",
                 borderRadius: "50%",
               }}
             ></i>
