@@ -422,7 +422,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <section className="App-header">
         <a
           onClick={user?.displayName ? logout : vkFunc}
           className="link"
@@ -482,7 +482,7 @@ function App() {
             <tr className="days">{generateDayCells4()}</tr>
           </tbody>
         </table>
-      </header>
+      </section>
     </div>
   )
 }
