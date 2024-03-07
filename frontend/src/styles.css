@@ -96,7 +96,7 @@ caption {
   /* background: #194d33;*/
   background-image: linear-gradient(
     to right,
-    rgba(101, 50, 148, 0.3),
+    rgba(101, 50, 148, 1),
     rgba(101, 50, 148, 0.2)
   );
 }
