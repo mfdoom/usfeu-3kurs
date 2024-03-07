@@ -93,7 +93,12 @@ caption {
   position: relative;
 }
 #calendar td.day.today {
-  background: #194d33;
+  /* background: #194d33;*/
+  background-image: linear-gradient(
+    to right,
+    rgba(101, 50, 148, 0.3),
+    rgba(101, 50, 148, 0.2)
+  );
 }
 #calendar td {
   min-height: 180px;
