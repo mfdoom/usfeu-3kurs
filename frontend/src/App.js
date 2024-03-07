@@ -320,7 +320,7 @@ function App() {
     const cells = []
     for (let i = 8; i < 15; i++) {
       cells.push(
-        <td key={i} className={DateDay === i ? "day today" : "day"}>
+        <td key={i} className={DateDay === i - 1 ? "day today" : "day"}>
           <div className="date">{i}</div>
           <div
             className="add"
