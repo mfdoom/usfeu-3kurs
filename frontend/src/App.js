@@ -318,7 +318,7 @@ function App() {
 
   function generateDayCells1() {
     const cells = []
-    for (let i = 6; i < 13; i++) {
+    for (let i = 8; i < 15; i++) {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
@@ -342,7 +342,7 @@ function App() {
   }
   function generateDayCells2() {
     const cells = []
-    for (let i = 13; i < 20; i++) {
+    for (let i = 15; i < 22; i++) {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
@@ -367,7 +367,7 @@ function App() {
 
   function generateDayCells3() {
     const cells = []
-    for (let i = 20; i < 27; i++) {
+    for (let i = 22; i < 29; i++) {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
@@ -392,7 +392,27 @@ function App() {
 
   function generateDayCells4() {
     const cells = []
-    for (let i = 27; i < 31; i++) {
+    for (let i = 29; i < 31; i++) {
+      cells.push(
+        <td key={i} className={DateDay === i ? "day today" : "day"}>
+          <div className="date">{i}</div>
+          <div
+            className="add"
+            onClick={() => {
+              if (user?.displayName.length === 0) {
+                return null
+              }
+
+              showPrompts(i)
+            }}
+          >
+            +
+          </div>
+          {checkDisciplesByDay(i)}
+        </td>
+      )
+    }
+    for (let i = 1; i < 6; i++) {
       cells.push(
         <td key={i} className={DateDay === i ? "day today" : "day"}>
           <div className="date">{i}</div>
