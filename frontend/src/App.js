@@ -455,8 +455,7 @@ function App() {
               background: "#2287ee",
               display: "flex",
               alignItems: "center",
-              padding: " 2px 12px",
-              borderRadius: " 4px",
+              padding: "2px 12px",
               maxHeight: "24px",
             }}
           >
