@@ -450,6 +450,7 @@ function App() {
           style={{}}
         >
           <div
+            className="logospan"
             style={{
               background: "#2287ee",
               display: "flex",
