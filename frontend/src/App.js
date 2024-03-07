@@ -99,6 +99,7 @@ function App() {
     } else {
       setUser(foundUser)
     }
+    console.log("made by Токмянин Л.И. (ИЦЭ-31з)")
   }, [])
 
   useEffect(() => {

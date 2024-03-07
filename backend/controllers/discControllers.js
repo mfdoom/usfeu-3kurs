@@ -52,7 +52,7 @@ const changeRaspById = AsyncHandler(async (req, res) => {
 const deleteDiscById = AsyncHandler(async (req, res) => {
   let _id = req.body.id
   let disc_id = req.body.disc_id
-  console.log(_id, disc_id)
+
   let del = async () =>
     Rasp.updateOne(
       { _id: mongoose.Types.ObjectId(_id) },
@@ -75,7 +75,7 @@ const pushDiscById = AsyncHandler(async (req, res) => {
     time,
     aud,
   }
-  console.log(dayid, name, time, aud)
+
   let push = async () =>
     await Rasp.findOneAndUpdate(
       { id: dayid },
