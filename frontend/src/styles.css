@@ -1,6 +1,16 @@
 body {
   font-family: Tahoma;
-  background: #212529;
+  background: linear-gradient(63deg, #262626 23%, transparent 23%) 7px 0,
+    linear-gradient(63deg, transparent 73%, #262626 76%),
+    linear-gradient(
+      63deg,
+      transparent 34%,
+      #262626 38%,
+      #262626 58%,
+      transparent 62%
+    ),
+    #222;
+  background-size: 16px 48px;
 }
 
 .link {
@@ -28,7 +38,6 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
-  background: #212529;
 }
 
 caption {
