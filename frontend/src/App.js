@@ -32,6 +32,7 @@ function App() {
 
   const [user, setUser] = useState({})
   const [disc, setDisc] = useState([])
+  const [loading, setLoading] = useState(true)
   const [test, setTest] = useState({ test: "test" })
 
   const loggedInUser = localStorage.getItem("user")
@@ -134,6 +135,7 @@ function App() {
 
           prom.then((res) => {
             setDisc(res)
+            setLoading(false)
           })
           setTest({ test: "test" })
         })
@@ -485,25 +487,28 @@ function App() {
             ></i>
           </div>
         </a>
-
-        <table id="calendar">
-          <caption>ИЦЭ-31з весенняя сессия(2024)</caption>
-          <tbody>
-            <tr className="weekdays">
-              <th scope="col">Понедельник</th>
-              <th scope="col">Вторник</th>
-              <th scope="col">Среда</th>
-              <th scope="col">Четверг</th>
-              <th scope="col">Пятница</th>
-              <th scope="col">Суббота</th>
-              <th scope="col">Воскресенье</th>
-            </tr>
-            <tr className="days">{generateDayCells1()}</tr>
-            <tr className="days">{generateDayCells2()}</tr>
-            <tr className="days">{generateDayCells3()}</tr>
-            <tr className="days">{generateDayCells4()}</tr>
-          </tbody>
-        </table>
+        {loading ? (
+          <div className="loading">Запрос данных</div>
+        ) : (
+          <table id="calendar">
+            <caption>ИЦЭ-31з весенняя сессия(2024)</caption>
+            <tbody>
+              <tr className="weekdays">
+                <th scope="col">Понедельник</th>
+                <th scope="col">Вторник</th>
+                <th scope="col">Среда</th>
+                <th scope="col">Четверг</th>
+                <th scope="col">Пятница</th>
+                <th scope="col">Суббота</th>
+                <th scope="col">Воскресенье</th>
+              </tr>
+              <tr className="days">{generateDayCells1()}</tr>
+              <tr className="days">{generateDayCells2()}</tr>
+              <tr className="days">{generateDayCells3()}</tr>
+              <tr className="days">{generateDayCells4()}</tr>
+            </tbody>
+          </table>
+        )}
       </section>
     </div>
   )
