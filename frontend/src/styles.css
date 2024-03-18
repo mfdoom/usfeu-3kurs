@@ -281,4 +281,7 @@ div.aud {
     right: auto;
     top: auto;
   }
+  .loading {
+    font-size: 18px;
+  }
 }
