@@ -10,8 +10,8 @@ connectDB()
 
 const importData = async () => {
   try {
-    const sampleDisc = disciples.map((hex) => {
-      return { ...hex }
+    const sampleDisc = disciples.map((item) => {
+      return { ...item }
     })
     await Rasp.insertMany(sampleDisc)
     console.log("Data Imported!")

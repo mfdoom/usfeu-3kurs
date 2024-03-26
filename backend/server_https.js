@@ -14,7 +14,7 @@ var express = require("express"),
   VkStrategy = require("passport-vk-strategy").Strategy
 
 var app = express()
-
+//
 var https = require("https")
 const fs = require("fs")
 var server = https.createServer(
