@@ -89,6 +89,7 @@ function App() {
           throw new Error("authentication has been failed!")
         })
         .then((resObject) => {
+          console.log(resObject)
           setUser(resObject)
           localStorage.setItem("user", JSON.stringify(resObject))
         })
@@ -422,9 +423,9 @@ function App() {
             height="100%"
             src="https://www.youtube.com/embed/2SUwOgmvzK4"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </td>
       )
