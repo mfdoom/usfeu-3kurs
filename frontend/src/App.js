@@ -241,7 +241,7 @@ function App() {
                     return null
                   }
                   let dispNameInput = prompt("", i.name)
-                  if (dispNameInput === null) {
+                  if (dispNameInput.trim().length === 0) {
                     return
                   } else changeDiscNameById(i._id, dispNameInput, "name")
                 }}
