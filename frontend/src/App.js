@@ -218,7 +218,7 @@ function App() {
     })
     let result = filteredArr.map((item, index) => {
       return item.disciples.map((i, ind) => {
-        return i.name?.length > 1 ? (
+        return i.name?.length > 0 ? (
           <React.Fragment key={ind}>
             <div className="event">
               <div

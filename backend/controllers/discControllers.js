@@ -1,11 +1,11 @@
-const Rasp = require("../models/disciplesModel.js")
+const Rasp = require("../models/raspSchema")
 const AsyncHandler = require("express-async-handler")
 const mongoose = require("mongoose")
 //
-const getRasp = AsyncHandler(async (req, res) => {
+const getRasp = async (req, res) => {
   const rasp = await Rasp.find({})
   res.json(rasp)
-})
+}
 
 const changeRaspById = AsyncHandler(async (req, res) => {
   let id = req.params.id

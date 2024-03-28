@@ -3,9 +3,9 @@ const disciples = [
     id: 8,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование123",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -58,9 +58,9 @@ const disciples = [
     id: 13,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -68,9 +68,9 @@ const disciples = [
     id: 14,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -143,9 +143,9 @@ const disciples = [
     id: 19,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -168,9 +168,9 @@ const disciples = [
     id: 21,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -238,9 +238,9 @@ const disciples = [
     id: 27,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -248,9 +248,9 @@ const disciples = [
     id: 28,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -304,9 +304,9 @@ const disciples = [
     id: 2,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -329,9 +329,9 @@ const disciples = [
     id: 4,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },
@@ -339,9 +339,9 @@ const disciples = [
     id: 5,
     disciples: [
       {
-        name: "",
-        aud: "",
-        time: "",
+        name: "Мат. моделирование",
+        aud: "2/432",
+        time: "16-55",
       },
     ],
   },

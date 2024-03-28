@@ -17,20 +17,4 @@ const disciplesSchema = mongoose.Schema(
   }
 )
 
-const raspSchema = mongoose.Schema(
-  {
-    id: {
-      type: Number,
-      required: true,
-      default: "",
-    },
-    disciples: [disciplesSchema],
-  },
-  {
-    timestamps: true,
-  }
-)
-
-const Rasp = mongoose.model("raspSchema", raspSchema)
-
-module.exports = Rasp
+module.exports = disciplesSchema

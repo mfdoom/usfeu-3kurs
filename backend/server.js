@@ -8,6 +8,7 @@ const { createServer } = require("http")
 const { Server } = require("socket.io")
 const morgan = require("morgan")
 const discRoutes = require("./routes/discRoutes.js")
+const discRoutesApp = require("./routes/discRoutesApp.js")
 
 connectDb()
 //
@@ -83,6 +84,7 @@ app.get("/", function (req, res) {
 })
 
 app.use("/api/rasp", discRoutes)
+app.use("/api/app", discRoutesApp)
 
 app.get("/logout", function (req, res) {
   req.session.destroy(function (err) {
