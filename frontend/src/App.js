@@ -118,7 +118,6 @@ function App() {
 
   useEffect(() => {
     const handleChangeGroup = () => {
-      console.log("group")
       setLoading(true)
       fetch(`${config.CALLBACK_URL}api/${checkActiveGroup()}`, {
         method: "GET",
