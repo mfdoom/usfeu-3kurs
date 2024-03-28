@@ -256,6 +256,8 @@ function App() {
                   i.name.toLowerCase().includes("зачет") ||
                   i.name.toLowerCase().includes("экз")
                     ? "event-desc ex"
+                    : i.name.toLowerCase().includes("подгруппа")
+                    ? "event-desc grouping"
                     : "event-desc"
                 }
               >
