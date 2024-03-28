@@ -275,6 +275,10 @@ div.aud {
     display: none;
   }
 
+  .title {
+    width: inherit;
+  }
+
   #calendar li {
     height: auto !important;
     border: 1px solid #ededed;
