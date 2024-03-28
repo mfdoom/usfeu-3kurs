@@ -3,14 +3,14 @@ const router = express.Router()
 //
 const {
   getRaspApp,
-  // changeRaspById,
-  // deleteDiscById,
-  // pushDiscById,
+  changeRaspByIdApp,
+  deleteDiscByIdApp,
+  pushDiscByIdApp,
 } = require("../controllers/discControllersApp.js")
 
 router.route("/").get(getRaspApp)
-// router.route("/:id").post(changeRaspById)
-// router.route("/delete/:id").post(deleteDiscById)
-// router.route("/push/:id").post(pushDiscById)
+router.route("/:id").post(changeRaspByIdApp)
+router.route("/delete/:id").post(deleteDiscByIdApp)
+router.route("/push/:id").post(pushDiscByIdApp)
 
 module.exports = router

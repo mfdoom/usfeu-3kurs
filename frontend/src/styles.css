@@ -40,6 +40,26 @@ body {
   width: 100%;
 }
 
+.title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  margin: 0px auto;
+  width: 40em;
+  height: 50px;
+}
+
+.groupname {
+  font-size: 32px;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.groupname.active {
+  color: wheat;
+}
+
 caption {
   text-align: center;
   grid-column: 1 / -1;

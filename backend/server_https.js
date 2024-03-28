@@ -7,6 +7,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleWare.js")
 const { createServer } = require("http")
 const morgan = require("morgan")
 const discRoutes = require("./routes/discRoutes.js")
+const discRoutesApp = require("./routes/discRoutesApp.js")
 
 var express = require("express"),
   passport = require("passport"),
@@ -94,6 +95,7 @@ app.get("/", function (req, res) {
 })
 
 app.use("/api/rasp", discRoutes)
+app.use("/api/app", discRoutesApp)
 
 app.get("/logout", function (req, res) {
   req.session.destroy(function (err) {

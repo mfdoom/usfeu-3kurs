@@ -7,6 +7,17 @@ axios.defaults.withCredentials = true
 
 function App() {
   let DateDay
+
+  const [user, setUser] = useState({})
+  const [disc, setDisc] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [activeGroup, setActiveGroup] = useState("itze")
+
+  const [test, setTest] = useState({ test: "test" })
+
+  const loggedInUser = localStorage.getItem("user")
+  const foundUser = JSON.parse(loggedInUser)
+
   function getCurrentDate() {
     let newDate = new Date().getDate()
     DateDay = newDate
@@ -30,16 +41,12 @@ function App() {
     }
   }
 
-  const [user, setUser] = useState({})
-  const [disc, setDisc] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [test, setTest] = useState({ test: "test" })
-
-  const loggedInUser = localStorage.getItem("user")
-  const foundUser = JSON.parse(loggedInUser)
+  const checkActiveGroup = () => {
+    return activeGroup === "itze" ? "rasp" : "app"
+  }
 
   function getRaspEffect() {
-    fetch(`${config.CALLBACK_URL}api/rasp`, {
+    fetch(`${config.CALLBACK_URL}api/${checkActiveGroup()}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -104,8 +111,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const getRasp = () => {
-      fetch(`${config.CALLBACK_URL}api/rasp`, {
+    getRaspEffect()
+  }, [test])
+
+  //
+
+  useEffect(() => {
+    const handleChangeGroup = () => {
+      console.log("group")
+      setLoading(true)
+      fetch(`${config.CALLBACK_URL}api/${checkActiveGroup()}`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -137,23 +152,15 @@ function App() {
             setDisc(res)
             setLoading(false)
           })
-          setTest({ test: "test" })
         })
         .catch((err) => {})
     }
-
-    getRasp()
-  }, [])
-
-  useEffect(() => {
-    getRaspEffect()
-  }, [test])
-
-  //
+    handleChangeGroup()
+  }, [activeGroup])
 
   const changeDiscNameById = (_id, nameInput, purpose) => {
     axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+      .post(`${config.CALLBACK_URL}api/${checkActiveGroup()}/${_id}`, {
         name: nameInput,
         purpose: purpose,
       })
@@ -165,7 +172,7 @@ function App() {
 
   const changeTimeById = (_id, nameInput, purpose) => {
     axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+      .post(`${config.CALLBACK_URL}api/${checkActiveGroup()}/${_id}`, {
         time: nameInput,
         purpose: purpose,
       })
@@ -177,7 +184,7 @@ function App() {
 
   const changeAudById = (_id, nameInput, purpose) => {
     axios
-      .post(`${config.CALLBACK_URL}api/rasp/${_id}`, {
+      .post(`${config.CALLBACK_URL}api/${checkActiveGroup()}/${_id}`, {
         aud: nameInput,
         purpose: purpose,
       })
@@ -189,7 +196,7 @@ function App() {
 
   const deleteDiscById = (id, disc_id) => {
     axios
-      .post(`${config.CALLBACK_URL}api/rasp/delete/${id}`, {
+      .post(`${config.CALLBACK_URL}api/${checkActiveGroup()}/delete/${id}`, {
         id: id,
         disc_id: disc_id,
       })
@@ -201,7 +208,7 @@ function App() {
 
   const pushDiscInfo = (dayid, name, time, aud) => {
     axios
-      .post(`${config.CALLBACK_URL}api/rasp/push/${dayid}`, {
+      .post(`${config.CALLBACK_URL}api/${checkActiveGroup()}/push/${dayid}`, {
         name,
         time,
         aud,
@@ -503,24 +510,43 @@ function App() {
         {loading ? (
           <div className="loading">Запрос данных</div>
         ) : (
-          <table id="calendar">
-            <caption>ИЦЭ-31з весенняя сессия(2024)</caption>
-            <tbody>
-              <tr className="weekdays">
-                <th scope="col">Понедельник</th>
-                <th scope="col">Вторник</th>
-                <th scope="col">Среда</th>
-                <th scope="col">Четверг</th>
-                <th scope="col">Пятница</th>
-                <th scope="col">Суббота</th>
-                <th scope="col">Воскресенье</th>
-              </tr>
-              <tr className="days">{generateDayCells1()}</tr>
-              <tr className="days">{generateDayCells2()}</tr>
-              <tr className="days">{generateDayCells3()}</tr>
-              <tr className="days">{generateDayCells4()}</tr>
-            </tbody>
-          </table>
+          <>
+            <div className="title">
+              <div
+                onClick={() => setActiveGroup("itze")}
+                className={
+                  activeGroup === "itze" ? "groupname active itze" : "groupname"
+                }
+              >
+                ИЦЭ-31з
+              </div>
+              <div
+                onClick={() => setActiveGroup("app")}
+                className={
+                  activeGroup === "app" ? "groupname active app" : "groupname"
+                }
+              >
+                АПП-31з
+              </div>
+            </div>
+            <table id="calendar">
+              <tbody>
+                <tr className="weekdays">
+                  <th scope="col">Понедельник</th>
+                  <th scope="col">Вторник</th>
+                  <th scope="col">Среда</th>
+                  <th scope="col">Четверг</th>
+                  <th scope="col">Пятница</th>
+                  <th scope="col">Суббота</th>
+                  <th scope="col">Воскресенье</th>
+                </tr>
+                <tr className="days">{generateDayCells1()}</tr>
+                <tr className="days">{generateDayCells2()}</tr>
+                <tr className="days">{generateDayCells3()}</tr>
+                <tr className="days">{generateDayCells4()}</tr>
+              </tbody>
+            </table>
+          </>
         )}
       </section>
     </div>
