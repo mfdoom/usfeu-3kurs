@@ -11,7 +11,10 @@ function App() {
   const [user, setUser] = useState({})
   const [disc, setDisc] = useState([])
   const [loading, setLoading] = useState(true)
-  const [activeGroup, setActiveGroup] = useState("itze")
+
+  const initGroup = localStorage.getItem("initGroup")
+
+  const [activeGroup, setActiveGroup] = useState(initGroup ? initGroup : "itze")
 
   const [test, setTest] = useState({ test: "test" })
 
@@ -514,7 +517,10 @@ function App() {
           <>
             <div className="title">
               <div
-                onClick={() => setActiveGroup("itze")}
+                onClick={() => {
+                  localStorage.setItem("initGroup", "itze")
+                  setActiveGroup("itze")
+                }}
                 className={
                   activeGroup === "itze" ? "groupname active itze" : "groupname"
                 }
@@ -522,7 +528,10 @@ function App() {
                 ИЦЭ-31з
               </div>
               <div
-                onClick={() => setActiveGroup("app")}
+                onClick={() => {
+                  localStorage.setItem("initGroup", "app")
+                  setActiveGroup("app")
+                }}
                 className={
                   activeGroup === "app" ? "groupname active app" : "groupname"
                 }
