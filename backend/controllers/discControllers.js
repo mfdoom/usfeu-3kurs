@@ -4,7 +4,6 @@ const mongoose = require("mongoose")
 //
 const getRasp = async (req, res) => {
   const rasp = await Rasp.find({})
-  console.log(rasp)
   res.json(rasp)
 }
 
